@@ -1,14 +1,16 @@
-import { test as base } from '@playwright/test';
+import { test as base, Page } from '@playwright/test';
 import { LoginSignupPage } from '../pages/LoginSignupPage';
 import { Header } from '../components/Header';
 import { ProductPage } from '../pages/ProductPage';
 import { CartModal } from '../components/CartModal';
+import { users } from '../data/users';
 
 type PageFixtures= {
     loginPage: LoginSignupPage;
     header: Header;
     productPage: ProductPage;
     cartModal: CartModal;
+    authenticatedPage: Page;
 }
 
 export const test= base.extend<PageFixtures>({
@@ -31,7 +33,12 @@ export const test= base.extend<PageFixtures>({
     cartModal: async({page}, use)=>{
         const cartModal= new CartModal(page);
         await use(cartModal);
-    }
+    },
 
+    authenticatedPage: async({page,loginPage}, use)=>{
+        await loginPage.goto();
+        await loginPage.login(users.valid.email, users.valid.password);
+        await use(page);
+    }
 });
 export{ expect } from '@playwright/test';
