@@ -1,5 +1,5 @@
-import {test,expect} from '../fixtures/base.fixture'
-import { users } from "../data/users";
+import {test,expect} from '../../fixtures/base.fixture';
+import { users } from "../../data/users";
 
 test.describe('Login tests', ()=>{
     test('User should login with valid credentials', async({loginPage,header})=>{

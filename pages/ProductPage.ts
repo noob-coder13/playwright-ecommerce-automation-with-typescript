@@ -27,4 +27,9 @@ export class ProductPage{
         const addToCartButton = product.locator('.add-to-cart');
         await addToCartButton.click();
     }
+
+    async goto():Promise<void>{
+        await this.page.goto('/products');
+    }
 }
+

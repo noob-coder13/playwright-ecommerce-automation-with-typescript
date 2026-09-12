@@ -36,14 +36,45 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
+      name: 'chromium-login',
+      testMatch: /.*\/unauthenticated\/.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Chrome'],
+    }
+  },
+
+    {
+      name: 'firefox-login',
+      testMatch: /.*\/unauthenticated\/.*\.spec\.ts/,
+      use: { 
+        ...devices['Desktop Firefox'],
+    }
+  },
+
+    {
+      name: 'chromium-authenticated',
+      testMatch: /.*\/authenticated\/.*\.spec\.ts/,
+      use:{
+        ...devices['Desktop Chrome'],
+        storageState: 'playwright/.auth/authstate.json',
+      },
+      dependencies: ['setup'],
     },
 
     {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+      name: 'firefox-authenticated',
+      testMatch: /.*\/authenticated\/.*\.spec\.ts/,
+      use:{
+        ...devices['Desktop Firefox'],
+        storageState: 'playwright/.auth/authstate.json',
+      },
+      dependencies: ['setup'],
+    }
+
 
     // {
     //   name: 'webkit',

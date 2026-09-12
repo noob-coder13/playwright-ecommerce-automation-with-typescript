@@ -1,9 +1,9 @@
-import { test,expect } from '../fixtures/base.fixture';
-import { products } from '../data/products';
+import { test,expect } from '../../fixtures/base.fixture';
+import { products } from '../../data/products';
 
 test.describe('Product page tests', ()=>{
-    test.beforeEach('Navigate to Products', async({header,authenticatedPage})=>{
-        await header.goToProducts();
+    test.beforeEach('Navigate to Products', async({productPage})=>{
+        await productPage.goto();
     });
 
     test('product search', async({productPage})=>{
