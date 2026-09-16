@@ -1,16 +1,16 @@
-import { test as base, Page } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { LoginSignupPage } from '../pages/LoginSignupPage';
 import { Header } from '../components/Header';
 import { ProductPage } from '../pages/ProductPage';
 import { CartModal } from '../components/CartModal';
-import { users } from '../data/users';
+import { CartPage } from '../pages/CartPage';
 
 type PageFixtures= {
     loginPage: LoginSignupPage;
     header: Header;
     productPage: ProductPage;
     cartModal: CartModal;
-    authenticatedPage: Page;
+    cartPage: CartPage;
 }
 
 export const test= base.extend<PageFixtures>({
@@ -35,10 +35,9 @@ export const test= base.extend<PageFixtures>({
         await use(cartModal);
     },
 
-    authenticatedPage: async({page,loginPage}, use)=>{
-        await loginPage.goto();
-        await loginPage.login(users.valid.email, users.valid.password);
-        await use(page);
+    cartPage: async({page}, use)=>{
+        const cartPage= new CartPage(page);
+        await use(cartPage);
     }
 });
 export{ expect } from '@playwright/test';

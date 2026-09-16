@@ -1,7 +1,6 @@
 import {Page, Locator} from '@playwright/test';
 
 export class LoginSignupPage{
-
     readonly page: Page;
     readonly emailInput: Locator;
     readonly passwordInput: Locator;
@@ -23,5 +22,9 @@ export class LoginSignupPage{
         await this.emailInput.fill(email);
         await this.passwordInput.fill(password);
         await this.loginButton.click();
+    }
+
+    isEmailTypeMismatch(): Promise<boolean>{
+        return this.emailInput.evaluate((input: HTMLInputElement) => input.validity.typeMismatch);
     }
 }
