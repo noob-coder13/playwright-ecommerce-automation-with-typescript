@@ -73,6 +73,14 @@ export default defineConfig({
         storageState: 'playwright/.auth/authstate.json',
       },
       dependencies: ['setup'],
+    },
+
+    {
+      name: 'api',
+      testMatch: /.*\/api\/.*\.spec\.ts/,
+      use: {
+        baseURL: 'https://jsonplaceholder.typicode.com',
+      }
     }
 
 
