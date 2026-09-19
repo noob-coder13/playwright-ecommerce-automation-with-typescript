@@ -29,7 +29,7 @@ export class ProductPage{
     }
 
     async goto():Promise<void>{
-        await this.page.goto('/products');
+        await this.page.goto('/products', { waitUntil: 'domcontentloaded'});
     }
 }
 

@@ -18,7 +18,7 @@ export class CartPage{
     }
 
     async goto(): Promise<void>{
-        await this.page.goto('/view_cart');
+        await this.page.goto('/view_cart', {waitUntil: 'domcontentloaded'});
     }
 
     async clearCart(): Promise<void> {
