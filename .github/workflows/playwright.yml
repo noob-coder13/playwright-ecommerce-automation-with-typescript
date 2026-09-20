@@ -16,6 +16,8 @@ jobs:
       run: npx playwright install --with-deps chromium firefox
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
     - name: Upload Playwright report
       if: always()
       uses: actions/upload-artifact@v4
@@ -29,4 +31,5 @@ jobs:
         name: test-results
         path: test-results/
         if-no-files-found: ignore
+      
 
